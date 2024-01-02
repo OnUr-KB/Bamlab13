@@ -1,5 +1,5 @@
 #include <iostream>
-#include <cmath>
+#include <cmath>  
 using namespace std;
 
 void stat(const double[],int,double[]);
@@ -16,4 +16,36 @@ int main(){
     cout << "\nMax = " << B[4];
     cout << "\nMin = " << B[5];
     return 0;
+}
+
+void stat(const double A[],int N ,double B[]){
+     for(int i=0;i<N;i++){    //ค่าเฉลี่ย
+        B[0] += A[i];   
+     }
+     B[0] = B[0]/N;
+
+     for(int i=0;i<N;i++){    //ส่วนเบี่ยงเบน
+        B[1] += pow(A[i]-B[0],2);
+     }
+     B[1]= sqrt(B[1]/N);
+     
+     B[2] = 1;
+     for(int i=0;i<N;i++){   //ค่าจีโอ
+        B[2] *= A[i]; 
+     }
+     B[2] = pow(B[2],1.0/N);
+
+     for(int i=0;i<N;i++){   //ค่าฮาโมนิก
+        B[3] += 1.0/A[i]; 
+     }
+     B[3] = N/B[3];
+
+     double max =A[0], min =A[0];    //ค่าmaxค่าmin
+     for(int i=0;i<N;i++){
+        if (A[i]>max) max = A[i];
+        if (A[i]<min) min = A[i];
+     }
+     B[4] = max;
+     B[5] = min;
+
 }
